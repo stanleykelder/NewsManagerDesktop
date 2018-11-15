@@ -42,9 +42,9 @@ public class Main extends Application {
 					AppScenes.IMAGE_PICKER.getFxmlFile()));*/
 			//Code for reader main window
 			FXMLLoader loader = new FXMLLoader (getClass().getResource(
-					AppScenes.EDITOR.getFxmlFile()));
+					AppScenes.READER.getFxmlFile()));
 			Pane root = loader.load();
-			NewsEditController controller = loader.<NewsEditController>getController();
+			NewsReaderController controller = loader.<NewsReaderController>getController();
 		
 			//Create properties for server connection
 			Properties prop = buildServerProperties();
