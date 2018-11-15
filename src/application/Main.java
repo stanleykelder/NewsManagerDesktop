@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import application.news.Article;
 import application.news.Categories;
+import application.news.User;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,21 +42,20 @@ public class Main extends Application {
 					AppScenes.IMAGE_PICKER.getFxmlFile()));*/
 			//Code for reader main window
 			FXMLLoader loader = new FXMLLoader (getClass().getResource(
-					AppScenes.READER.getFxmlFile()));
+					AppScenes.EDITOR.getFxmlFile()));
 			Pane root = loader.load();
-			NewsReaderController controller = loader.<NewsReaderController>getController();
+			NewsEditController controller = loader.<NewsEditController>getController();
 		
 			//Create properties for server connection
 			Properties prop = buildServerProperties();
 			ConnectionManager connection = new ConnectionManager(prop);
 			//Connecting as public (anonymous) for your group
-			connection.setAnonymousAPIKey(""/*Put your group API Key here*/);
-		//Login whitout login form:
-			//	connection.login("Reader2", "reader2"); //User: Reader2 and password "reader2" 
-		//    User user = new User ("Reader2", 
-		//	Integer.parseInt(connection.getIdUser()));
-		//	controller.setUsr(user);
-			controller.setConnectionManager(connection);		
+			connection.setAnonymousAPIKey("REVWX1RFQU1fMDM="); /*Put your group API Key here*/
+			//Login whitout login form:
+			connection.login("tobias.piffrader", "65396f08"); //User: Reader2 and password "reader2" 
+		    User user = new User ("tobias.piffrader", Integer.parseInt(connection.getIdUser()));
+			controller.setUsr(user);
+			//controller.setConnectionManager(connection);		
 			
 			//end code for main window reader
 			
