@@ -22,6 +22,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -61,7 +62,7 @@ public class NewsReaderController {
     private Label idUserLabel;
 	
 	@FXML
-    private ImageView img;
+    private ImageView imgView;
 
     @FXML
     private ListView<String> menuList;
@@ -89,6 +90,7 @@ public class NewsReaderController {
 		articleList = newsReaderModel.getArticles();
 		menuItems = FXCollections.observableArrayList (
 				"Load news from file", "Login", "New", "Exit", "Edit", "Delte");
+		//menuList.setOrientation(Orientation.HORIZONTAL);
 		System.out.println(articleList + "constructor");
 	}
 
@@ -103,14 +105,16 @@ public class NewsReaderController {
         System.out.println(this.articleList.toString() + "initialize");
         this.headlineList.setItems(articleList);
         this.menuList.setItems(menuItems);
-        
+        ///newsManager18-19Students 2/src/images/abstract1.jpg
         this.headlineList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Article>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Article> observable, Article oldValue, Article newValue) {
 				if (newValue != null) {
 					//btnNext.setDisable(false);
-					bodyWebView.getEngine().loadContent(newValue.toString());
+					bodyWebView.getEngine().loadContent(newValue.getAbstractText());
+					System.out.println(newValue.getImageData());
+					imgView.setImage(newValue.getImageData());
 				} else {
 					bodyWebView.getEngine().loadContent("");
 				}
@@ -118,7 +122,49 @@ public class NewsReaderController {
 			}
         	
         });
-    }	
+    }
+	
+	
+	
+	 /*
+     * Open the editing form and pass the contact data. 
+     * It waits until edit is finished and, at the end, update contact data
+     */
+    @FXML
+    void onReadMore(ActionEvent event) {
+    	Scene parentScene = ((Node) event.getSource()).getScene();
+		FXMLLoader loader = null;
+		try {
+			loader = new FXMLLoader(getClass().getResource("NewsDetails.fxml"));
+			Pane root = loader.load();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			Window parentStage = parentScene.getWindow();
+			Stage stage = new Stage();
+			stage.initOwner(parentStage);
+			stage.setScene(scene);
+			//Get the controller for NewsDetailsController.fxml
+			NewsDetailsController controller = loader.<NewsDetailsController>getController();
+			Article selected = this.headlineList.getSelectionModel().getSelectedItem();
+			//Another way is to pass the contact
+			System.out.println("Article selected: " + selected);
+			controller.setArticle(selected);
+					/**selected.getAbstractText(), selected.getBodyText(),
+					selected.getCategory(), selected.getIdArticle(), selected.getIdImage(), selected.getIdUser(),
+					selected.getImageData(), selected.getPublicationDate(),
+					selected.getSubtitle(), selected.getTitle());*/
+			//Uncomment next sentence if you want and undecorated window 
+			//stage.initStyle(StageStyle.UNDECORATED);
+			//user response is required before continuing with the program
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.showAndWait();	
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 
 	private void getData() {
 		//TODO retrieve data and update UI

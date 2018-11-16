@@ -16,8 +16,8 @@
       <Label layoutX="14.0" layoutY="14.0" text="News Online for:" />
       <Label fx:id="idUserLabel" layoutX="116.0" layoutY="14.0" text="Label" />
       <Label layoutX="14.0" layoutY="160.0" prefHeight="17.0" prefWidth="150.0" text="HEADLINES" />
-      <Button fx:id="readMoreBtn" layoutX="387.0" layoutY="359.0" mnemonicParsing="false" text="Read More" />
+      <Button fx:id="readMoreBtn" layoutX="387.0" layoutY="359.0" mnemonicParsing="false" onAction="#onReadMore" text="Read More" />
       <ListView fx:id="menuList" layoutX="322.0" layoutY="15.0" prefHeight="155.0" prefWidth="150.0" />
-      <ImageView fx:id="img" fitHeight="123.0" fitWidth="172.0" layoutX="135.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgView" fitHeight="123.0" fitWidth="172.0" layoutX="135.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
