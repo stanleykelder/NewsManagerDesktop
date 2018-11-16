@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsReaderController">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsReaderController">
+   <children>
+      <ComboBox fx:id="categoryBox" layoutX="14.0" layoutY="359.0" prefHeight="27.0" prefWidth="121.0" />
+      <ListView fx:id="headlineList" layoutX="14.0" layoutY="177.0" prefHeight="173.0" prefWidth="121.0" />
+      <WebView fx:id="bodyWebView" layoutX="179.0" layoutY="220.0" prefHeight="130.0" prefWidth="293.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="News Online for:" />
+      <Label fx:id="idUserLabel" layoutX="116.0" layoutY="14.0" text="Label" />
+      <Label layoutX="14.0" layoutY="160.0" prefHeight="17.0" prefWidth="150.0" text="HEADLINES" />
+      <Button fx:id="readMoreBtn" layoutX="387.0" layoutY="359.0" mnemonicParsing="false" text="Read More" />
+      <ListView fx:id="menuList" layoutX="322.0" layoutY="15.0" prefHeight="155.0" prefWidth="150.0" />
+      <ImageView fx:id="img" fitHeight="123.0" fitWidth="172.0" layoutX="135.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
 </AnchorPane>
