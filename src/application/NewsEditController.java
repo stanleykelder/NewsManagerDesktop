@@ -23,8 +23,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,18 +41,36 @@ import serverConection.ConnectionManager;
 import serverConection.exceptions.ServerCommunicationError;
 
 /**
- * @author ÁngelLucas
- *
+ * @author Ã�ngelLucas
+ * @author StanleyKelder
  */
 public class NewsEditController {
     private ConnectionManager connection;
 	private NewsEditModel editingArticle;
 	private User usr;
+	private boolean body = true;
+	private boolean html = false;
+	
+	
 	//TODO add attributes and methods as needed
-
-
-
+	@FXML 
+    private ImageView articleImage;
 	@FXML
+	private TextField articleTitle;
+	@FXML
+	private TextField articleSubtitle;
+	@FXML
+	private TextArea bodyText;
+	@FXML
+	private TextArea abstractText;
+	@FXML
+	private HTMLEditor bodyHTML;
+	@FXML
+	private HTMLEditor abstractHTML;
+	@FXML
+    private ComboBox<Categories> categoryBox;
+
+	@FXML //code to select image
 	void onImageClicked(MouseEvent event) {
 		if (event.getClickCount() >= 2) {
 			Scene parentScene = ((Node) event.getSource()).getScene();
@@ -71,13 +91,54 @@ public class NewsEditController {
 				ImagePickerController controller = loader.<ImagePickerController>getController();
 				Image image = controller.getImage();
 				if (image != null) {
-					editingArticle.setImage(image);
-					//TODO Update image on UI
+					//IMAGE ON UI
+					articleImage.setImage(image);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
+		}
+	}
+	
+	@FXML //initialize picture
+	void initialize() {
+        assert articleImage != null : "fx:id=\"articleImage\" was not injected: check your FXML file 'NewsEdit.fxml'.";
+        Image image = new Image("images/selectImage.png", true);
+        articleImage.setImage(image);
+        
+        
+        for (Categories c : Categories.values())
+            System.out.println(c);
+
+//        System.out.println(application.news.Categories);
+        this.categoryBox.getItems().setAll(Categories.values());
+        this.categoryBox.getSelectionModel().selectFirst();
+    }
+	
+	@FXML
+	void onBodyAbstractClicked (ActionEvent event) {
+		if (html) {
+			abstractHTML.setVisible(body);
+			body = !body;
+			bodyHTML.setVisible(body);
+		} else {
+			abstractText.setVisible(body);
+			body = !body;
+			bodyText.setVisible(body);
+		}
+	}
+	
+	@FXML
+	void onTextHTMLClicked (ActionEvent event) {
+		if (body) {
+			bodyText.setVisible(html);
+			html = !html;
+			bodyHTML.setVisible(html);
+		} else {
+			abstractText.setVisible(html);
+			html = !html;
+			abstractHTML.setVisible(html);
 		}
 	}
 	
