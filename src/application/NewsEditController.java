@@ -70,6 +70,7 @@ public class NewsEditController {
 	@FXML
     private ComboBox<Categories> categoryBox;
 
+
 	@FXML //code to select image
 	void onImageClicked(MouseEvent event) {
 		if (event.getClickCount() >= 2) {
@@ -101,19 +102,17 @@ public class NewsEditController {
 		}
 	}
 	
-	@FXML //initialize picture
+	@FXML 
 	void initialize() {
-        assert articleImage != null : "fx:id=\"articleImage\" was not injected: check your FXML file 'NewsEdit.fxml'.";
+		//initialize picture
+		assert articleImage != null : "fx:id=\"articleImage\" was not injected: check your FXML file 'NewsEdit.fxml'.";
         Image image = new Image("images/selectImage.png", true);
         articleImage.setImage(image);
         
-        
-        for (Categories c : Categories.values())
-            System.out.println(c);
-
-//        System.out.println(application.news.Categories);
+        //initialize category dropdown
         this.categoryBox.getItems().setAll(Categories.values());
         this.categoryBox.getSelectionModel().selectFirst();
+        
     }
 	
 	@FXML
@@ -142,6 +141,27 @@ public class NewsEditController {
 		}
 	}
 	
+	@FXML
+	void onSaveFileClicked (ActionEvent event) {
+		this.editingArticle.setTitle(articleTitle.getText());
+		System.out.println(articleTitle.getText());
+		
+		this.editingArticle.setSubtitle(articleSubtitle.getText());
+		System.out.println(articleSubtitle.getText());
+		
+		this.editingArticle.setBody(bodyText.getText());
+		System.out.println(bodyText.getText());
+		
+		this.editingArticle.setCategory(categoryBox.getValue());
+		System.out.println(categoryBox.getValue());
+		
+		this.editingArticle.setImage(articleImage.getImage());
+		System.out.println(articleImage.getImage());
+				
+		
+		write();
+	}
+	
 	/**
 	 * Send and article to server,
 	 * Title and category must be defined and category must be different to ALL
@@ -152,7 +172,7 @@ public class NewsEditController {
 		Categories category = null; //TODO Get article cateory
 		if (titleText == null || category == null || 
 				titleText.equals("") || category == Categories.ALL) {
-			Alert alert = new Alert(AlertType.ERROR, "Imposible send the article!! Title and categoy are mandatory", ButtonType.OK);
+			Alert alert = new Alert(AlertType.ERROR, "Imposible to send the article. Title and categoy are mandatory", ButtonType.OK);
 			alert.showAndWait();
 			return false;
 		}
@@ -177,10 +197,13 @@ public class NewsEditController {
 	 */
 	void setUsr(User usr) {
 		this.usr = usr;
+		
+		System.out.println("ReceivedID: " + usr.getIdUser());
 		//TODO Update UI and controls 
 		
 	}
 
+//Where should I use this?
 	Article getArticle() {
 		Article result = null;
 		if (this.editingArticle != null) {
@@ -196,8 +219,11 @@ public class NewsEditController {
 	 *            the article to set
 	 */
 	void setArticle(Article article) {
+
 		this.editingArticle = (article != null) ? new NewsEditModel(usr, article) : new NewsEditModel(usr);
 		//TODO update UI
+//		Article editedArticle = this.getArticle();
+		this.editingArticle.setTitle(articleTitle.getText());
 	}
 	
 	/**
@@ -205,6 +231,7 @@ public class NewsEditController {
 	 * Article must have a title
 	 */
 	private void write() {
+		
 		//TODO Consolidate all changes	
 		this.editingArticle.commit();
 		//Removes special characters not allowed for filenames

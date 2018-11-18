@@ -72,6 +72,7 @@
                <children>
                   <Button fx:id="BodyAbstract" mnemonicParsing="false" onAction="#onBodyAbstractClicked" text="Body/Abstract" />
                   <Button fx:id="textHTML" mnemonicParsing="false" onAction="#onTextHTMLClicked" text="Text/HTML" />
+                  <Button fx:id="textHTML1" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Save to file" />
                </children>
             </HBox>
          </children>

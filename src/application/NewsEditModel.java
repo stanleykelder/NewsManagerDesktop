@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 /**
  * This class is used to represent an article when it is editing
  * This class is needed to develop NewsEditController
- * @author ÁngelLucas
+ * @author Ã�ngelLucas
  *
  */
 class NewsEditModel {
@@ -108,6 +108,8 @@ class NewsEditModel {
 	 * @param image new image for the edited article
 	 */
 	void setImage(Image image) {
+		System.out.println("hello");
+		System.out.println(image);
 		edited.setImageData(image);
 		this.bModified = true;
 	}
@@ -162,6 +164,9 @@ class NewsEditModel {
 		edited.setCategory(category.toString());
 	}
 
+
+
+	
 	/**
 	 *  
 	 * @return a copy of edited article abstract
@@ -177,6 +182,37 @@ class NewsEditModel {
 	public StringProperty abstractTextProperty() {
 			return edited.abstractTextProperty();
 	}
+
+	// Setters
+	
+	/**
+	 * Set title to the edited article
+	 * @param title new title for edited article
+	 */
+	public void setTitle(String title){
+		this.bModified = true;
+		edited.setTitle(title);
+	}
+	
+
+	/**
+	 * Set subtitle to the edited article
+	 * @param subtitle new subtitle for edited article
+	 */
+	public void setSubtitle(String subtitle){
+		this.bModified = true;
+		edited.setSubtitle(subtitle);
+	}
+
+	/**
+	 * Set body to the edited article
+	 * @param body new body for edited article
+	 */
+	public void setBody(String body){
+		this.bModified = true;
+		edited.setBodyText(body);
+	}
+
 	
 	/**
 	 * Make changes permanent. Changes can't be undone 
