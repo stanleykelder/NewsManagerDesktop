@@ -112,7 +112,6 @@ public class NewsEditController {
         //initialize category dropdown
         this.categoryBox.getItems().setAll(Categories.values());
         this.categoryBox.getSelectionModel().selectFirst();
-        
     }
 	
 	@FXML

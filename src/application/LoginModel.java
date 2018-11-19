@@ -76,12 +76,11 @@ class LoginModel {
 				usr = new User (login, 
 						Integer.parseInt(connectionManager.getIdUser()));
 				usr.setAdmin(connectionManager.isAdministrator());
+				System.out.println("succes: " + usr);
 			} catch (AuthenticationError e) {
 				Logger.getGlobal().log(Level.INFO,"Login error! incorrect user or password!!");
 			}
-			
 		}
-		
 		return usr;
 	}
 }
