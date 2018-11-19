@@ -85,7 +85,6 @@ public class NewsReaderController {
 		categoryList = newsReaderModel.getCategories();
 		articleList = newsReaderModel.getArticles();
 		menuItems = FXCollections.observableArrayList("Load news from file", "Login", "New", "Exit", "Edit", "Delte");
-		System.out.println(articleList + "constructor");
 	}
 
 	@FXML
@@ -106,7 +105,6 @@ public class NewsReaderController {
 				if (newValue != null) {
 					readMoreBtn.setDisable(false);
 					bodyWebView.getEngine().loadContent(newValue.getAbstractText());
-					System.out.println(newValue.getImageData());
 					imgView.setImage(newValue.getImageData());
 				} else {
 					bodyWebView.getEngine().loadContent("");
@@ -129,7 +127,6 @@ public class NewsReaderController {
 							return false;
 						}
 					});
-					System.out.println(newValue + " if  ");
 					headlineList.setItems(filteredItems);
 				} else {
 					headlineList.setItems(articleList);
@@ -161,9 +158,8 @@ public class NewsReaderController {
 			// Get the controller for NewsDetailsController.fxml
 			NewsDetailsController controller = loader.<NewsDetailsController>getController();
 			Article selected = this.headlineList.getSelectionModel().getSelectedItem();
-			System.out.println("Article selected: " + selected);
 			controller.setArticle(selected);
-			// Uncomment next sentence if you want and undecorated window
+			// Uncomment next sentence if you want an undecorated window
 			// stage.initStyle(StageStyle.UNDECORATED);
 			// user response is required before continuing with the program
 			stage.initModality(Modality.WINDOW_MODAL);
