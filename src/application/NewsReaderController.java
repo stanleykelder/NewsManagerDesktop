@@ -126,6 +126,7 @@ public class NewsReaderController {
 						}
 					});
 					headlineList.setItems(filteredItems);
+					imgView.setImage(null);
 				} else {
 					headlineList.setItems(articleList);
 				}
