@@ -55,7 +55,7 @@ public class Main extends Application {
 			connection.login("tobias.piffrader", "65396f08"); //User: Reader2 and password "reader2" 
 		    User user = new User ("tobias.piffrader", Integer.parseInt(connection.getIdUser()));
 			controller.setUsr(user);
-			//controller.setConnectionManager(connection);		
+			controller.setConnectionManager(connection);		
 			
 			//end code for main window reader
 			

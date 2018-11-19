@@ -80,8 +80,6 @@ public class NewsReaderController {
 	private Button readMoreBtn;
 
 	public NewsReaderController() {
-		// Uncomment next sentence to use data from server instead dummy data
-		// newsReaderModel.setDummyData(false);
 		categoryList = newsReaderModel.getCategories();
 		articleList = newsReaderModel.getArticles();
 		menuItems = FXCollections.observableArrayList("Load news from file", "Login", "New", "Exit", "Edit", "Delte");
@@ -121,7 +119,7 @@ public class NewsReaderController {
 					Categories newValue) {
 				if (newValue != Categories.ALL || newValue == oldValue) {
 					filteredItems.setPredicate(item -> {
-						if (item.getCategory() == newValue.toString()) {
+						if (item.getCategory().equals(newValue.toString())) {
 							return true;
 						} else {
 							return false;
@@ -184,7 +182,7 @@ public class NewsReaderController {
 	}
 
 	void setConnectionManager(ConnectionManager connection) {
-		// this.newsReaderModel.setDummyData(false); //System is connected so dummy data
+		this.newsReaderModel.setDummyData(false); //System is connected so dummy data
 		// are not needed
 		this.newsReaderModel.setConnectionManager(connection);
 		this.getData();
