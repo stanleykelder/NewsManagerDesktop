@@ -6,7 +6,11 @@ import java.util.Properties;
 import application.news.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import serverConection.ConnectionManager;
 import serverConection.exceptions.AuthenticationError;
 
@@ -20,7 +24,9 @@ public class LoginController {
 	private TextField username;
 	@FXML
 	private TextField password;
-
+	@FXML
+	private Button Cancel;
+	
 	public LoginController () throws AuthenticationError{
 		loginModel.setDummyData(false);
 		
@@ -35,9 +41,28 @@ public class LoginController {
 	void onLoginClicked (ActionEvent event) {
 		loggedUsr = this.loginModel.validateUser(username.getText(), password.getText());
 		
-		//NewsReaderController.setUsr(loggedUsr);
+		if (loggedUsr != null) {
+			//NewsReaderController.setUsr(loggedUsr);
+	 		//close stage
+			Stage stage = (Stage) Cancel.getScene().getWindow();
+	        stage.close();
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Wrong username password");
+			alert.setHeaderText("Your username or password seems to be incorrect. ");
+			alert.setContentText("Please try again.");
+
+			alert.showAndWait();
+		}
 		
-		
+	}
+
+//	TODO
+	@FXML
+	void onCancelClicked (ActionEvent event) {
+		//close stage
+		Stage stage = (Stage) Cancel.getScene().getWindow();
+        stage.close();
 	}
 	
 	User getLoggedUsr() {
