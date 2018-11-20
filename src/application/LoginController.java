@@ -29,12 +29,6 @@ public class LoginController {
 	
 	public LoginController () throws AuthenticationError{
 		loginModel.setDummyData(false);
-		
-		
-		//Create properties here? NO! Remove and setConnectionManager
-		Properties prop = Main.buildServerProperties();
-		ConnectionManager connection = new ConnectionManager(prop);
-		loginModel.setConnectionManager(connection);
 	}
 	
 	@FXML
@@ -42,7 +36,6 @@ public class LoginController {
 		loggedUsr = this.loginModel.validateUser(username.getText(), password.getText());
 		
 		if (loggedUsr != null) {
-			//NewsReaderController.setUsr(loggedUsr);
 	 		//close stage
 			Stage stage = (Stage) Cancel.getScene().getWindow();
 	        stage.close();

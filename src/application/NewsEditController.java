@@ -47,7 +47,7 @@ import serverConection.exceptions.ServerCommunicationError;
 public class NewsEditController {
     private ConnectionManager connection;
 	private NewsEditModel editingArticle;
-	private User usr;
+	private User usr; 
 	private boolean body = true;
 	private boolean html = false;
 	
@@ -69,6 +69,8 @@ public class NewsEditController {
 	private HTMLEditor abstractHTML;
 	@FXML
     private ComboBox<Categories> categoryBox;
+	@FXML
+	private Label bodyOrAbstract;
 
 
 	@FXML //code to select image
@@ -112,6 +114,11 @@ public class NewsEditController {
         //initialize category dropdown
         this.categoryBox.getItems().setAll(Categories.values());
         this.categoryBox.getSelectionModel().selectFirst();
+        
+//        this.editingArticle.getTitle();
+//		System.out.println(this.editingArticle.getTitle());
+       
+ 
     }
 	
 	@FXML
@@ -124,6 +131,11 @@ public class NewsEditController {
 			abstractText.setVisible(body);
 			body = !body;
 			bodyText.setVisible(body);
+		}
+		if (body) {
+			bodyOrAbstract.setText("Body");
+		} else {
+			bodyOrAbstract.setText("Abstract");
 		}
 	}
 	
@@ -142,23 +154,31 @@ public class NewsEditController {
 	
 	@FXML
 	void onSaveFileClicked (ActionEvent event) {
-		this.editingArticle.setTitle(articleTitle.getText());
+//		this.editingArticle.setTitle(articleTitle.getText());
+//		System.out.println(articleTitle.getText());
+		
+		this.editingArticle.titleProperty().setValue(articleTitle.getText());;
 		System.out.println(articleTitle.getText());
 		
-		this.editingArticle.setSubtitle(articleSubtitle.getText());
+		this.editingArticle.subtitleProperty().setValue(articleSubtitle.getText());;
 		System.out.println(articleSubtitle.getText());
 		
-		this.editingArticle.setBody(bodyText.getText());
+		this.editingArticle.bodyTextProperty().setValue(bodyText.getText());;
 		System.out.println(bodyText.getText());
+//		this.editingArticle.getTitle();
+//		System.out.println(this.editingArticle.getTitle());
+//		
+//		this.editingArticle.setBody(bodyText.getText());
+//		System.out.println(bodyText.getText());
+//		
+//		this.editingArticle.setCategory(categoryBox.getValue());
+//		System.out.println(categoryBox.getValue());
+//		
+//		this.editingArticle.setImage(articleImage.getImage());
+//		System.out.println(articleImage.getImage());
+//				
 		
-		this.editingArticle.setCategory(categoryBox.getValue());
-		System.out.println(categoryBox.getValue());
-		
-		this.editingArticle.setImage(articleImage.getImage());
-		System.out.println(articleImage.getImage());
-				
-		
-		write();
+//		write();
 	}
 	
 	/**
@@ -185,7 +205,7 @@ public class NewsEditController {
 	 * needed to save a news 
 	 * @param connection connection manager
 	 */
-	void setConnectionMannager(ConnectionManager connection) {
+	void setConnectionManager(ConnectionManager connection) {
 		this.connection = connection;
 		//TODO enable save and send button
 	}
@@ -221,8 +241,12 @@ public class NewsEditController {
 
 		this.editingArticle = (article != null) ? new NewsEditModel(usr, article) : new NewsEditModel(usr);
 		//TODO update UI
-//		Article editedArticle = this.getArticle();
-		this.editingArticle.setTitle(articleTitle.getText());
+		articleTitle.setText(editingArticle.getTitle());
+		articleSubtitle.setText(editingArticle.getSubtitle());
+		
+		this.categoryBox.getSelectionModel().select(editingArticle.getCategory());
+		
+//		articleTitle.setText(editingArticle.getTitle());
 	}
 	
 	/**

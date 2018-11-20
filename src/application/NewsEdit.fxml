@@ -68,12 +68,44 @@
                   <HTMLEditor fx:id="abstractHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your abstract here.&lt;/body&gt;&lt;/html&gt;" layoutY="10.0" prefHeight="200.0" prefWidth="516.0" visible="false" />
                </children>
             </Pane>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="91.0" prefWidth="570.0">
                <children>
-                  <Button fx:id="BodyAbstract" mnemonicParsing="false" onAction="#onBodyAbstractClicked" text="Body/Abstract" />
-                  <Button fx:id="textHTML" mnemonicParsing="false" onAction="#onTextHTMLClicked" text="Text/HTML" />
-                  <Button fx:id="textHTML1" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Save to file" />
+                  <VBox prefHeight="91.0" prefWidth="128.0">
+                     <children>
+                        <Button fx:id="BodyAbstract" mnemonicParsing="false" onAction="#onBodyAbstractClicked" text="Body/Abstract">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="20.0" right="10.0" top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Label fx:id="bodyOrAbstract" text="Body">
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Button fx:id="textHTML" mnemonicParsing="false" onAction="#onTextHTMLClicked" text="Text/HTML">
+                     <HBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="saveToFile" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Save to file">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="10.0" top="20.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="saveToServer" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Save to server">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="10.0" top="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Back">
+                     <HBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

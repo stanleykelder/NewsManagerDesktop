@@ -52,6 +52,7 @@ import serverConection.ConnectionManager;
  */
 public class NewsReaderController {
 
+    private ConnectionManager connection;
 	private NewsReaderModel newsReaderModel = new NewsReaderModel();
 	private User usr;
 	private ObservableList<Categories> categoryList;
@@ -82,7 +83,7 @@ public class NewsReaderController {
 	public NewsReaderController() {
 		categoryList = newsReaderModel.getCategories();
 		articleList = newsReaderModel.getArticles();
-		menuItems = FXCollections.observableArrayList("Load news from file", "Login", "New", "Exit", "Edit", "Delte");
+		menuItems = FXCollections.observableArrayList("Load news from file", "Login", "New", "Exit", "Edit", "Delete");
 	}
 
 	@FXML
@@ -95,6 +96,7 @@ public class NewsReaderController {
 		this.categoryBox.getSelectionModel().selectFirst();
 		this.headlineList.setItems(articleList);
 		this.menuList.setItems(menuItems);
+		this.idUserLabel.setText("Not logged in");
 		// for category filter
 		FilteredList<Article> filteredItems = new FilteredList<Article>(articleList, p -> true);
 		this.headlineList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Article>() {
@@ -137,7 +139,98 @@ public class NewsReaderController {
 
 	}
 
-	/**
+	
+// code for linking 
+//	(I think this is not the best way to do it, because there is a lot of repetition. But my quick try 
+//	to remove the repetition did not work)
+    @FXML
+    void onMenuClicked(MouseEvent event) {
+    	if (event.getClickCount() >= 2) {
+    		//load scene and loader responding to item
+    		if (menuList.getSelectionModel().getSelectedItem().equals("Login")) {
+    			Scene parentScene = ((Node) event.getSource()).getScene();
+    			FXMLLoader loader = null;
+    			try {
+    				loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+    				Pane root = loader.load();
+    				Scene scene = new Scene(root);
+    				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+    				Window parentStage = parentScene.getWindow();
+    				Stage stage = new Stage();
+    				stage.initOwner(parentStage);
+    				stage.setScene(scene);
+    				// Get the controller for NewsEdit.fxml
+    				LoginController controller = loader.<LoginController>getController();
+    				controller.setConnectionManager(connection);
+    				// Uncomment next sentence if you want an undecorated window
+    				// stage.initStyle(StageStyle.UNDECORATED);
+    				// user response is required before continuing with the program
+    				stage.initModality(Modality.WINDOW_MODAL);
+    				stage.showAndWait();
+    				//set the User after having logged in
+    				usr = controller.getLoggedUsr();
+    				idUserLabel.setText(usr.getLogin());
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    			}}
+    			else if (menuList.getSelectionModel().getSelectedItem().equals("New")) {
+        			Scene parentScene = ((Node) event.getSource()).getScene();
+        			FXMLLoader loader = null;
+        			try {
+        				loader = new FXMLLoader(getClass().getResource("NewsEdit.fxml"));
+        				Pane root = loader.load();
+        				Scene scene = new Scene(root);
+        				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        				Window parentStage = parentScene.getWindow();
+        				Stage stage = new Stage();
+        				stage.initOwner(parentStage);
+        				stage.setScene(scene);
+        				// Get the controller for NewsEdit.fxml
+        				NewsEditController controller = loader.<NewsEditController>getController();
+        				//pass connection and user, Article has to be (and is) empty
+        				controller.setConnectionManager(connection);
+        				controller.setUsr(usr);
+        				controller.setArticle(new Article());	
+        				// Uncomment next sentence if you want an undecorated window
+        				// stage.initStyle(StageStyle.UNDECORATED);
+        				// user response is required before continuing with the program
+        				stage.initModality(Modality.WINDOW_MODAL);
+        				stage.showAndWait();
+        			} catch (Exception e) {
+        				e.printStackTrace();
+    			}} 
+    			else if (menuList.getSelectionModel().getSelectedItem().equals("Edit")) {
+        			Scene parentScene = ((Node) event.getSource()).getScene();
+        			FXMLLoader loader = null;
+        			try {
+        				loader = new FXMLLoader(getClass().getResource("NewsEdit.fxml"));
+        				Pane root = loader.load();
+        				Scene scene = new Scene(root);
+        				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        				Window parentStage = parentScene.getWindow();
+        				Stage stage = new Stage();
+        				stage.initOwner(parentStage);
+        				stage.setScene(scene);
+        				// Get the controller for NewsEdit.fxml
+        				NewsEditController controller = loader.<NewsEditController>getController();
+        				controller.setConnectionManager(connection);
+        				controller.setUsr(usr);
+        				// here the selected article is passed
+	    				Article selected = this.headlineList.getSelectionModel().getSelectedItem();
+	    				controller.setArticle(selected);
+        				// Uncomment next sentence if you want an undecorated window
+        				// stage.initStyle(StageStyle.UNDECORATED);
+        				// user response is required before continuing with the program
+        				stage.initModality(Modality.WINDOW_MODAL);
+        				stage.showAndWait();
+        			} catch (Exception e) {
+        				e.printStackTrace();
+        			}} 
+    	}
+    }
+    
+    
+    /**
 	 * Open the editing form and pass the contact data. It waits until edit is
 	 * finished and, at the end, update contact data
 	 */
@@ -187,6 +280,7 @@ public class NewsReaderController {
 		// are not needed
 		this.newsReaderModel.setConnectionManager(connection);
 		this.getData();
+		this.connection = connection;
 	}
 
 	/**
