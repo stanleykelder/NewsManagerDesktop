@@ -6,18 +6,26 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsReaderController">
+
+<AnchorPane prefHeight="736.0" prefWidth="800.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsReaderController">
    <children>
-      <ComboBox fx:id="categoryBox" layoutX="14.0" layoutY="359.0" prefHeight="27.0" prefWidth="121.0" />
-      <ListView fx:id="headlineList" layoutX="14.0" layoutY="177.0" prefHeight="173.0" prefWidth="121.0" />
-      <WebView fx:id="bodyWebView" layoutX="179.0" layoutY="220.0" prefHeight="130.0" prefWidth="293.0" />
-      <Label layoutX="14.0" layoutY="14.0" text="News Online for:" />
-      <Label fx:id="idUserLabel" layoutX="116.0" layoutY="14.0" text="Label" />
-      <Label layoutX="14.0" layoutY="160.0" prefHeight="17.0" prefWidth="150.0" text="HEADLINES" />
-      <Button fx:id="readMoreBtn" layoutX="387.0" layoutY="359.0" mnemonicParsing="false" onAction="#onReadMore" text="Read More" />
-      <ListView fx:id="menuList" layoutX="322.0" layoutY="15.0" onMouseClicked="#onMenuClicked" prefHeight="155.0" prefWidth="150.0" />
-      <ImageView fx:id="imgView" fitHeight="123.0" fitWidth="172.0" layoutX="135.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox fx:id="categoryBox" layoutX="82.0" layoutY="451.0" prefHeight="27.0" prefWidth="121.0" />
+      <ListView fx:id="headlineList" layoutX="78.0" layoutY="254.0" prefHeight="173.0" prefWidth="121.0" />
+      <WebView fx:id="bodyWebView" layoutX="225.0" layoutY="507.0" prefHeight="150.0" prefWidth="370.0" />
+      <Label layoutX="29.0" layoutY="26.0" text="News Online for:" textFill="RED">
+         <font>
+            <Font name="Helvetica Bold" size="36.0" />
+         </font></Label>
+      <Label fx:id="idUserLabel" layoutX="390.0" layoutY="40.0" prefHeight="0.0" prefWidth="34.0" text="Label" />
+      <Label layoutX="279.0" layoutY="162.0" prefHeight="101.0" prefWidth="288.0" text="HEADLINES" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Helvetica" size="37.0" />
+         </font></Label>
+      <Button fx:id="readMoreBtn" layoutX="627.0" layoutY="665.0" mnemonicParsing="false" onAction="#onReadMore" prefHeight="45.0" prefWidth="129.0" text="Read More" />
+      <ListView fx:id="menuList" layoutX="221.0" layoutY="253.0" prefHeight="200.0" prefWidth="386.0" onMouseClicked="#onMenuClicked" />
+      <ImageView fx:id="imgView" fitHeight="123.0" fitWidth="172.0" layoutX="57.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
