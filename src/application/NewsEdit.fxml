@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane prefHeight="736.0" prefWidth="800.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsEditController">
+<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsEditController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="735.0" prefWidth="737.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -77,47 +77,37 @@
             </HBox>
             <Pane prefHeight="406.0" prefWidth="700.0">
                <children>
-                  <TextArea fx:id="bodyText" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" text="Write your body here." visible="true">
+                  <TextArea fx:id="bodyText" layoutX="32.0" layoutY="28.0" prefHeight="328.0" prefWidth="733.0" text="Write your body here." visible="true">
                      <font>
                         <Font name="Helvetica" size="21.0" />
                      </font>
                   </TextArea>
-                  <TextArea fx:id="abstractText" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" text="Write your abstract here." visible="false" wrapText="true">
+                  <TextArea fx:id="abstractText" layoutX="32.0" layoutY="28.0" prefHeight="328.0" prefWidth="733.0" text="Write your abstract here." visible="false" wrapText="true">
                      <font>
                         <Font name="Helvetica" size="21.0" />
                      </font></TextArea>
-                  <HTMLEditor fx:id="bodyHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your body here.&lt;/body&gt;&lt;/html&gt;" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" visible="false" />
-                  <HTMLEditor fx:id="abstractHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your abstract here.&lt;/body&gt;&lt;/html&gt;" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" visible="false" />
+                  <HTMLEditor fx:id="bodyHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your body here.&lt;/body&gt;&lt;/html&gt;" layoutX="32.0" layoutY="28.0" prefHeight="328.0" prefWidth="733.0" visible="false" />
+                  <HTMLEditor fx:id="abstractHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your abstract here.&lt;/body&gt;&lt;/html&gt;" layoutX="32.0" layoutY="28.0" prefHeight="328.0" prefWidth="733.0" visible="false" />
+                  <Label fx:id="bodyOrAbstract" layoutX="667.0" layoutY="3.0" prefHeight="23.0" prefWidth="97.0" text="Body" textAlignment="CENTER">
+                     <font>
+                        <Font name="Helvetica" size="18.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="2.0" />
+                     </padding>
+                  </Label>
                </children>
             </Pane>
             <HBox alignment="CENTER" layoutY="600.0" prefHeight="140.0" prefWidth="800.0">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="135.0">
-                     <children>
-                        <Label fx:id="bodyOrAbstract" prefHeight="21.0" prefWidth="124.0" text="Body" textAlignment="CENTER">
-                           <VBox.margin>
-                              <Insets left="17.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Helvetica" size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets bottom="2.0" />
-                           </padding>
-                        </Label>
-                        <Button fx:id="BodyAbstract" mnemonicParsing="false" onAction="#onBodyAbstractClicked" prefHeight="57.0" prefWidth="115.0" text="Body/Abstract">
-                           <VBox.margin>
-                              <Insets bottom="28.0" left="15.0" right="10.0" top="14.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
+                  <Button fx:id="BodyAbstract" mnemonicParsing="false" onAction="#onBodyAbstractClicked" prefHeight="50.0" prefWidth="120.0" text="Body/Abstract">
                      <HBox.margin>
-                        <Insets bottom="5.0" right="20.0" />
+                        <Insets right="20.0" />
                      </HBox.margin>
-                  </VBox>
+                  </Button>
                   <Button fx:id="textHTML" mnemonicParsing="false" onAction="#onTextHTMLClicked" prefHeight="50.0" prefWidth="120.0" text="Text/HTML">
                      <HBox.margin>
                         <Insets right="20.0" />
