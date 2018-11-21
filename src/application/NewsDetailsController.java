@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -37,13 +38,13 @@ public class NewsDetailsController {
 	    
 	    
 	    @FXML // fx:id="titleBox"
-	    private TextField title; // Value injected by FXMLLoader
+	    private Label title; // Value injected by FXMLLoader
 
 	    @FXML // fx:id="sutitleBox"
-	    private TextField subtitle; // Value injected by FXMLLoader
+	    private Label subtitle; // Value injected by FXMLLoader
 
 	    @FXML // fx:id="categoy"
-	    private TextField category; // Value injected by FXMLLoader
+	    private Label category; // Value injected by FXMLLoader
 	    
 	    
 	    @FXML // fx:id="articleBox"

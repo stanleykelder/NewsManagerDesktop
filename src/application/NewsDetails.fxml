@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -10,31 +9,19 @@
 
 <AnchorPane prefHeight="736.0" prefWidth="800.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsDetailsController">
    <children>
-      <Label layoutX="310.0" layoutY="80.0" text="Title: ">
+      <Label fx:id="title" layoutX="500.0" layoutY="117.0" prefHeight="41.0" prefWidth="287.0" text="Title:">
+         <font>
+            <Font name="Helvetica" size="31.0" />
+         </font></Label>
+      <Label fx:id="subtitle" layoutX="500.0" layoutY="201.0" prefHeight="29.0" prefWidth="288.0" text="Subtitle:">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font></Label>
-      <Label layoutX="309.0" layoutY="150.0" text="Subtitle:">
+      <Label layoutX="40.0" layoutY="260.0" text="Category: " textFill="#ff5900">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font></Label>
-      <Label layoutX="310.0" layoutY="220.0" text="Category: ">
-         <font>
-            <Font name="Helvetica" size="24.0" />
-         </font></Label>
-      <TextField fx:id="title" editable="false" layoutX="435.0" layoutY="80.0">
-         <font>
-            <Font name="Helvetica" size="22.0" />
-         </font></TextField>
-      <TextField fx:id="subtitle" editable="false" layoutX="435.0" layoutY="150.0" prefHeight="42.0" prefWidth="276.0">
-         <font>
-            <Font name="Helvetica Light" size="22.0" />
-         </font></TextField>
-      <TextField fx:id="category" editable="false" layoutX="435.0" layoutY="220.0">
-         <font>
-            <Font name="Helvetica" size="22.0" />
-         </font></TextField>
-      <ImageView fx:id="imgView" fitHeight="198.0" fitWidth="261.0" layoutX="37.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgView" fitHeight="198.0" fitWidth="356.0" layoutX="29.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="552.0" layoutY="667.0" mnemonicParsing="false" onAction="#changeAction" prefHeight="43.0" prefWidth="200.0" text="Body/Abstract" textAlignment="CENTER">
          <font>
             <Font name="Helvetica" size="24.0" />
@@ -43,6 +30,11 @@
          <font>
             <Font name="Helvetica" size="24.0" />
          </font></Button>
-      <WebView fx:id="bodyText" layoutX="22.0" layoutY="325.0" prefHeight="306.0" prefWidth="734.0" zoom="3.0" />
+      <WebView fx:id="bodyText" layoutX="22.0" layoutY="325.0" prefHeight="306.0" prefWidth="734.0" />
+      <Label fx:id="category" layoutX="155.0" layoutY="260.0" prefHeight="29.0" prefWidth="184.0" text="Category: ">
+         <font>
+            <Font name="Helvetica" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

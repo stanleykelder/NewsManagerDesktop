@@ -15,41 +15,56 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane prefHeight="420.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsEditController">
+<AnchorPane prefHeight="736.0" prefWidth="800.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsEditController">
    <children>
-      <VBox prefHeight="420.0" prefWidth="570.0">
+      <VBox alignment="TOP_CENTER" prefHeight="735.0" prefWidth="737.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="30.0" prefWidth="570.0">
+            <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Text fill="#aeaeae" strokeType="OUTSIDE" strokeWidth="0.0" text="Create or edit article" textAlignment="CENTER" wrappingWidth="568.8034057617188">
+                  <Text fill="#ff5900" strokeType="OUTSIDE" strokeWidth="0.0" text="Create or edit article" textAlignment="CENTER" wrappingWidth="801.9218139648438">
                      <font>
-                        <Font name="Segoe UI" size="22.0" />
+                        <Font name="Helvetica" size="48.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
                   </Text>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="202.0" prefWidth="800.0">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="387.0">
+                  <VBox prefHeight="200.0" prefWidth="534.0">
                      <children>
-                        <TextField fx:id="articleTitle" prefHeight="38.0" prefWidth="387.0" promptText="Title">
+                        <TextField fx:id="articleTitle" prefHeight="50.0" prefWidth="300.0" promptText="Title">
                            <font>
-                              <Font name="Segoe UI" size="24.0" />
+                              <Font name="Helvetica" size="20.0" />
                            </font>
-                        </TextField>
-                        <TextField fx:id="articleSubtitle" promptText="Subitle">
-                           <font>
-                              <Font name="Segoe UI" size="18.0" />
-                           </font>
-                        </TextField>
-                        <Label text="Category:">
                            <VBox.margin>
-                              <Insets left="10.0" top="15.0" />
+                              <Insets top="20.0" />
                            </VBox.margin>
-                        </Label>
-                        <ComboBox fx:id="categoryBox" prefWidth="243.0">
+                        </TextField>
+                        <TextField fx:id="articleSubtitle" prefHeight="50.0" prefWidth="300.0" promptText="Subitle">
+                           <font>
+                              <Font name="Helvetica" size="20.0" />
+                           </font>
                            <VBox.margin>
-                              <Insets left="120.0" top="-20.0" />
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label prefHeight="26.0" prefWidth="103.0" text="Category:">
+                           <VBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="categoryBox" prefHeight="34.0" prefWidth="243.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="120.0" top="-25.0" />
                            </VBox.margin>
                         </ComboBox>
                      </children>
@@ -60,46 +75,65 @@
                      </HBox.margin></ImageView>
                </children>
             </HBox>
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <Pane prefHeight="406.0" prefWidth="700.0">
                <children>
-                  <TextArea fx:id="bodyText" prefHeight="200.0" prefWidth="506.0" text="Write your body here." visible="true" />
-                  <TextArea fx:id="abstractText" prefHeight="200.0" prefWidth="506.0" text="Write your abstract here." visible="false" />
-                  <HTMLEditor fx:id="bodyHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your body here.&lt;/body&gt;&lt;/html&gt;" prefHeight="200.0" prefWidth="506.0" visible="false" />
-                  <HTMLEditor fx:id="abstractHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your abstract here.&lt;/body&gt;&lt;/html&gt;" layoutY="10.0" prefHeight="200.0" prefWidth="516.0" visible="false" />
+                  <TextArea fx:id="bodyText" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" text="Write your body here." visible="true">
+                     <font>
+                        <Font name="Helvetica" size="21.0" />
+                     </font>
+                  </TextArea>
+                  <TextArea fx:id="abstractText" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" text="Write your abstract here." visible="false" wrapText="true">
+                     <font>
+                        <Font name="Helvetica" size="21.0" />
+                     </font></TextArea>
+                  <HTMLEditor fx:id="bodyHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your body here.&lt;/body&gt;&lt;/html&gt;" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" visible="false" />
+                  <HTMLEditor fx:id="abstractHTML" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Write your abstract here.&lt;/body&gt;&lt;/html&gt;" layoutX="32.0" layoutY="28.0" prefHeight="339.0" prefWidth="733.0" visible="false" />
                </children>
             </Pane>
-            <HBox prefHeight="91.0" prefWidth="570.0">
+            <HBox alignment="CENTER" layoutY="600.0" prefHeight="140.0" prefWidth="800.0">
                <children>
-                  <VBox prefHeight="91.0" prefWidth="128.0">
+                  <VBox prefHeight="100.0" prefWidth="135.0">
                      <children>
-                        <Button fx:id="BodyAbstract" mnemonicParsing="false" onAction="#onBodyAbstractClicked" text="Body/Abstract">
+                        <Label fx:id="bodyOrAbstract" prefHeight="21.0" prefWidth="124.0" text="Body" textAlignment="CENTER">
                            <VBox.margin>
-                              <Insets bottom="5.0" left="20.0" right="10.0" top="20.0" />
+                              <Insets left="17.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Helvetica" size="15.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="2.0" />
+                           </padding>
+                        </Label>
+                        <Button fx:id="BodyAbstract" mnemonicParsing="false" onAction="#onBodyAbstractClicked" prefHeight="57.0" prefWidth="115.0" text="Body/Abstract">
+                           <VBox.margin>
+                              <Insets bottom="28.0" left="15.0" right="10.0" top="14.0" />
                            </VBox.margin>
                         </Button>
-                        <Label fx:id="bodyOrAbstract" text="Body">
-                           <VBox.margin>
-                              <Insets left="45.0" />
-                           </VBox.margin>
-                        </Label>
                      </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="20.0" />
+                     </HBox.margin>
                   </VBox>
-                  <Button fx:id="textHTML" mnemonicParsing="false" onAction="#onTextHTMLClicked" text="Text/HTML">
+                  <Button fx:id="textHTML" mnemonicParsing="false" onAction="#onTextHTMLClicked" prefHeight="50.0" prefWidth="120.0" text="Text/HTML">
                      <HBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets right="20.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="saveToFile" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Save to file">
+                  <Button fx:id="saveToFile" mnemonicParsing="false" onAction="#onSaveFileClicked" prefHeight="50.0" prefWidth="120.0" text="Save to file">
                      <HBox.margin>
-                        <Insets bottom="20.0" left="10.0" top="20.0" />
+                        <Insets right="20.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="saveToServer" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Save to server">
+                  <Button fx:id="saveToServer" mnemonicParsing="false" onAction="#onSaveFileClicked" prefHeight="50.0" prefWidth="120.0" text="Save to server">
                      <HBox.margin>
-                        <Insets bottom="20.0" left="10.0" top="20.0" />
+                        <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="back" mnemonicParsing="false" onAction="#onSaveFileClicked" text="Back">
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#onSaveFileClicked" prefHeight="50.0" prefWidth="120.0" text="Back">
                      <HBox.margin>
-                        <Insets left="10.0" top="20.0" />
+                        <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
                </children>

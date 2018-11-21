@@ -13,9 +13,21 @@
             <Font name="Segoe UI" size="34.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="46.0" layoutY="104.0" prefHeight="38.0" prefWidth="312.0" promptText="Username" />
-      <TextField fx:id="password" layoutX="46.0" layoutY="156.0" prefHeight="38.0" prefWidth="312.0" promptText="Password" />
-      <Button layoutX="140.0" layoutY="224.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="38.0" prefWidth="125.0" text="LOGIN" />
-      <Button fx:id="Cancel" layoutX="358.0" layoutY="9.0" mnemonicParsing="false" onAction="#onCancelClicked" prefHeight="19.0" prefWidth="35.0" text="X" />
+      <TextField fx:id="username" layoutX="46.0" layoutY="104.0" prefHeight="38.0" prefWidth="312.0" promptText="Username">
+         <font>
+            <Font name="Helvetica" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="password" layoutX="46.0" layoutY="156.0" prefHeight="38.0" prefWidth="312.0" promptText="Password">
+         <font>
+            <Font name="Helvetica" size="16.0" />
+         </font></TextField>
+      <Button layoutX="46.0" layoutY="224.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="38.0" prefWidth="125.0" text="LOGIN">
+         <font>
+            <Font name="Helvetica Bold" size="13.0" />
+         </font></Button>
+      <Button fx:id="Cancel" layoutX="306.0" layoutY="224.0" mnemonicParsing="false" onAction="#onCancelClicked" prefHeight="38.0" prefWidth="52.0" text="X">
+         <font>
+            <Font name="Helvetica" size="16.0" />
+         </font></Button>
    </children>
 </AnchorPane>
