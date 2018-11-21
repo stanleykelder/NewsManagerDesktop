@@ -116,12 +116,12 @@
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="saveToServer" mnemonicParsing="false" onAction="#onSaveFileClicked" prefHeight="50.0" prefWidth="120.0" text="Save to server">
+                  <Button fx:id="saveToServer" mnemonicParsing="false" onAction="#onSaveToServerClicked" prefHeight="50.0" prefWidth="120.0" text="Save to server">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="back" mnemonicParsing="false" onAction="#onSaveFileClicked" prefHeight="50.0" prefWidth="120.0" text="Back">
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="50.0" prefWidth="120.0" text="Back">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

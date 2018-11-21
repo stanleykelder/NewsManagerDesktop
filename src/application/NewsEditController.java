@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -71,6 +72,8 @@ public class NewsEditController {
     private ComboBox<Categories> categoryBox;
 	@FXML
 	private Label bodyOrAbstract;
+	@FXML
+	private Button back;
 
 
 	@FXML //code to select image
@@ -115,10 +118,10 @@ public class NewsEditController {
         this.categoryBox.getItems().setAll(Categories.values());
         this.categoryBox.getSelectionModel().selectFirst();
         
-//        this.editingArticle.getTitle();
-//		System.out.println(this.editingArticle.getTitle());
-       
- 
+        bodyText.textProperty().addListener(
+				 (observable, oldvalue, newvalue) -> bodyHTML.setHtmlText(bodyText.getText()));
+        abstractText.textProperty().addListener(
+				 (observable, oldvalue, newvalue) -> abstractHTML.setHtmlText(abstractText.getText()));
     }
 	
 	@FXML
@@ -142,10 +145,12 @@ public class NewsEditController {
 	@FXML
 	void onTextHTMLClicked (ActionEvent event) {
 		if (body) {
+			bodyText.setText(bodyHTML.getHtmlText());
 			bodyText.setVisible(html);
 			html = !html;
 			bodyHTML.setVisible(html);
 		} else {
+			abstractText.setText(abstractHTML.getHtmlText());
 			abstractText.setVisible(html);
 			html = !html;
 			abstractHTML.setVisible(html);
@@ -153,42 +158,49 @@ public class NewsEditController {
 	}
 	
 	@FXML
-	void onSaveFileClicked (ActionEvent event) {
-//		this.editingArticle.setTitle(articleTitle.getText());
-//		System.out.println(articleTitle.getText());
+	void onSaveToServerClicked (ActionEvent event) throws ServerCommunicationError {
+		Changes();
+		this.send();
 		
-		this.editingArticle.titleProperty().setValue(articleTitle.getText());;
+		//close stage
+		Stage stage = (Stage) back.getScene().getWindow();
+        stage.close();
+	}
+	
+	@FXML
+	void onSaveFileClicked (ActionEvent event) {
+		Changes();
+		write();
+	}
+	
+	private void Changes() {
+		this.editingArticle.titleProperty().setValue(articleTitle.getText());
 		System.out.println(articleTitle.getText());
 		
-		this.editingArticle.subtitleProperty().setValue(articleSubtitle.getText());;
+		this.editingArticle.subtitleProperty().setValue(articleSubtitle.getText());
 		System.out.println(articleSubtitle.getText());
 		
-		this.editingArticle.bodyTextProperty().setValue(bodyText.getText());;
+		this.editingArticle.bodyTextProperty().setValue(bodyText.getText());
 		System.out.println(bodyText.getText());
-//		this.editingArticle.getTitle();
-//		System.out.println(this.editingArticle.getTitle());
-//		
-//		this.editingArticle.setBody(bodyText.getText());
+
+		this.editingArticle.abstractTextProperty().setValue(abstractText.getText());
+		System.out.println(abstractText.getText());
+
+		this.editingArticle.setCategory(this.categoryBox.getSelectionModel().getSelectedItem());
 //		System.out.println(bodyText.getText());
-//		
-//		this.editingArticle.setCategory(categoryBox.getValue());
-//		System.out.println(categoryBox.getValue());
-//		
-//		this.editingArticle.setImage(articleImage.getImage());
-//		System.out.println(articleImage.getImage());
-//				
 		
-//		write();
+		this.editingArticle.setImage(articleImage.getImage());
 	}
 	
 	/**
 	 * Send and article to server,
 	 * Title and category must be defined and category must be different to ALL
 	 * @return true if the article has been saved
+	 * @throws ServerCommunicationError 
 	 */
-	private boolean send() {
-		String titleText = null; // TODO Get article title
-		Categories category = null; //TODO Get article cateory
+	private boolean send() throws ServerCommunicationError {
+		String titleText = articleTitle.getText(); 
+		Categories category = this.categoryBox.getSelectionModel().getSelectedItem();
 		if (titleText == null || category == null || 
 				titleText.equals("") || category == Categories.ALL) {
 			Alert alert = new Alert(AlertType.ERROR, "Imposible to send the article. Title and categoy are mandatory", ButtonType.OK);
@@ -196,6 +208,9 @@ public class NewsEditController {
 			return false;
 		}
 //TODO prepare and send using connection.saveArticle( ...)
+		this.editingArticle.commit();
+		connection.saveArticle(this.editingArticle.getArticleOriginal());
+		
 		
 		return true;
 	}
@@ -216,19 +231,25 @@ public class NewsEditController {
 	 */
 	void setUsr(User usr) {
 		this.usr = usr;
-		
-		System.out.println("ReceivedID: " + usr.getIdUser());
 		//TODO Update UI and controls 
 		
 	}
 
-//Where should I use this?
 	Article getArticle() {
 		Article result = null;
 		if (this.editingArticle != null) {
 			result = this.editingArticle.getArticleOriginal();
 		}
 		return result;
+	}
+	
+	@FXML
+	void onBackClicked(ActionEvent event) {
+		this.editingArticle.discardChanges();
+		
+		//close stage
+		Stage stage = (Stage) back.getScene().getWindow();
+        stage.close();
 	}
 
 	/**
@@ -237,16 +258,21 @@ public class NewsEditController {
 	 * @param article
 	 *            the article to set
 	 */
+	//TODO Show in html edited view!
+	//TODO Synchronize htmlarea and textarea
 	void setArticle(Article article) {
-
 		this.editingArticle = (article != null) ? new NewsEditModel(usr, article) : new NewsEditModel(usr);
 		//TODO update UI
-		articleTitle.setText(editingArticle.getTitle());
-		articleSubtitle.setText(editingArticle.getSubtitle());
-		
-		this.categoryBox.getSelectionModel().select(editingArticle.getCategory());
-		
-//		articleTitle.setText(editingArticle.getTitle());
+		if (article != null) {
+			articleTitle.setText(article.getTitle());
+			articleSubtitle.setText(article.getSubtitle());
+			this.categoryBox.getSelectionModel().select(editingArticle.getCategory());
+			articleImage.setImage(article.getImageData());
+			bodyText.setText(article.getBodyText());;
+			abstractText.setText(article.getAbstractText());;
+			bodyHTML.setHtmlText(article.getBodyText());
+			abstractHTML.setHtmlText(article.getAbstractText());;
+		}
 	}
 	
 	/**

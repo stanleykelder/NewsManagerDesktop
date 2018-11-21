@@ -108,8 +108,6 @@ class NewsEditModel {
 	 * @param image new image for the edited article
 	 */
 	void setImage(Image image) {
-		System.out.println("hello");
-		System.out.println(image);
 		edited.setImageData(image);
 		this.bModified = true;
 	}
@@ -121,7 +119,7 @@ class NewsEditModel {
 	public String getTitle() {
 		return edited.getTitle();
 	}
-
+	
 	/**
 	 * 
 	 * @return a copy the edited article subtitle
