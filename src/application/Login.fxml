@@ -6,28 +6,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginWindow" prefHeight="294.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<AnchorPane fx:id="loginWindow" prefHeight="294.0" prefWidth="404.0" style=": ;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <children>
-      <Label alignment="CENTER" layoutX="132.0" layoutY="21.0" prefHeight="63.0" prefWidth="141.0" text="LOGIN" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="132.0" layoutY="21.0" prefHeight="63.0" prefWidth="141.0" text="LOGIN" textAlignment="CENTER" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="131.0">
          <font>
-            <Font name="Segoe UI" size="34.0" />
+            <Font name="Helvetica" size="34.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="46.0" layoutY="104.0" prefHeight="38.0" prefWidth="312.0" promptText="Username">
+      <TextField fx:id="username" layoutX="46.0" layoutY="104.0" prefHeight="38.0" prefWidth="312.0" promptText="Username" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="47.0">
          <font>
             <Font name="Helvetica" size="16.0" />
          </font></TextField>
-      <TextField fx:id="password" layoutX="46.0" layoutY="156.0" prefHeight="38.0" prefWidth="312.0" promptText="Password">
+      <TextField fx:id="password" layoutX="46.0" layoutY="156.0" prefHeight="38.0" prefWidth="312.0" promptText="Password" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0">
          <font>
             <Font name="Helvetica" size="16.0" />
          </font></TextField>
-      <Button layoutX="46.0" layoutY="224.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="38.0" prefWidth="125.0" text="LOGIN">
+      <Button layoutX="48.0" layoutY="213.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="50.0" prefWidth="197.0" text="LOGIN" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="211.0">
          <font>
             <Font name="Helvetica Bold" size="13.0" />
          </font></Button>
-      <Button fx:id="Cancel" layoutX="306.0" layoutY="224.0" mnemonicParsing="false" onAction="#onCancelClicked" prefHeight="38.0" prefWidth="52.0" text="X">
+      <Button fx:id="Cancel" layoutX="283.0" layoutY="213.0" mnemonicParsing="false" onAction="#onCancelClicked" prefHeight="50.0" prefWidth="111.0" text="Cancel" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="211.0">
          <font>
-            <Font name="Helvetica" size="16.0" />
+            <Font name="Helvetica Bold" size="14.0" />
          </font></Button>
    </children>
 </AnchorPane>
