@@ -205,7 +205,7 @@ public class NewsReaderController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			} else if (menuList.getSelectionModel().getSelectedItem().equals("New")) {
+			} else if (menuList.getSelectionModel().getSelectedItem().equals("New") && usr != null) {
 				Scene parentScene = ((Node) event.getSource()).getScene();
 				FXMLLoader loader = null;
 				try {
@@ -232,7 +232,7 @@ public class NewsReaderController {
 					e.printStackTrace();
 				}
 				getData();
-			} else if (menuList.getSelectionModel().getSelectedItem().equals("Edit")) {
+			} else if (menuList.getSelectionModel().getSelectedItem().equals("Edit") && usr != null) {
 				Scene parentScene = ((Node) event.getSource()).getScene();
 				FXMLLoader loader = null;
 				try {
@@ -260,7 +260,7 @@ public class NewsReaderController {
 					e.printStackTrace();
 				}
 				getData();
-			} else if (menuList.getSelectionModel().getSelectedItem().equals("Load news from file")) {
+			} else if (menuList.getSelectionModel().getSelectedItem().equals("Load news from file") && usr != null) {
 				Scene parentScene = ((Node) event.getSource()).getScene();
 				FXMLLoader loader = null;
 				try {
@@ -318,7 +318,7 @@ public class NewsReaderController {
 					e.printStackTrace();
 				}
 				getData();
-			} else if (menuList.getSelectionModel().getSelectedItem().equals("Delete")) {
+			} else if (menuList.getSelectionModel().getSelectedItem().equals("Delete") && usr != null) {
 				Alert alert = new Alert(AlertType.CONFIRMATION, "Delete article " + article.getIdArticle() + " ?", ButtonType.YES, ButtonType.NO);
 				alert.showAndWait();
 
