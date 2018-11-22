@@ -5,10 +5,12 @@ import java.util.Properties;
 
 import application.news.User;
 import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import serverConection.ConnectionManager;
@@ -23,9 +25,11 @@ public class LoginController {
 	@FXML
 	private TextField username;
 	@FXML
-	private TextField password;
+	private PasswordField passwordMasked;
 	@FXML
 	private Button Cancel;
+	
+	private Boolean passwordShow = false;
 	
 	public LoginController () throws AuthenticationError{
 		loginModel.setDummyData(false);
@@ -33,7 +37,7 @@ public class LoginController {
 	
 	@FXML
 	void onLoginClicked (ActionEvent event) {
-		loggedUsr = this.loginModel.validateUser(username.getText(), password.getText());
+		loggedUsr = this.loginModel.validateUser(username.getText(), passwordMasked.getText());
 		
 		if (loggedUsr != null) {
 	 		//close stage
