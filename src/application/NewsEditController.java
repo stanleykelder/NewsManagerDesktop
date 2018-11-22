@@ -136,10 +136,13 @@ public class NewsEditController {
 			bodyText.setVisible(body);
 		}
 		if (body) {
-			bodyOrAbstract.setText("Body");
+			bodyOrAbstract.setText("Body");	
 		} else {
 			bodyOrAbstract.setText("Abstract");
 		}
+		
+		bodyText.setText(bodyHTML.getHtmlText());
+		abstractText.setText(abstractHTML.getHtmlText());
 	}
 	
 	@FXML
@@ -155,6 +158,9 @@ public class NewsEditController {
 			html = !html;
 			abstractHTML.setVisible(html);
 		}
+		bodyText.setText(bodyHTML.getHtmlText());
+		abstractText.setText(abstractHTML.getHtmlText());
+		
 	}
 	
 	@FXML
@@ -174,6 +180,9 @@ public class NewsEditController {
 	}
 	
 	private void Changes() {
+		bodyText.setText(bodyHTML.getHtmlText());
+		abstractText.setText(abstractHTML.getHtmlText());
+		
 		this.editingArticle.titleProperty().setValue(articleTitle.getText());
 		System.out.println(articleTitle.getText());
 		
@@ -259,7 +268,6 @@ public class NewsEditController {
 	 *            the article to set
 	 */
 	//TODO Show in html edited view!
-	//TODO Synchronize htmlarea and textarea
 	void setArticle(Article article) {
 		this.editingArticle = (article != null) ? new NewsEditModel(usr, article) : new NewsEditModel(usr);
 		//TODO update UI
