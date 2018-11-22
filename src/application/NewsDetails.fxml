@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
@@ -25,11 +26,17 @@
       <Button layoutX="552.0" layoutY="667.0" mnemonicParsing="false" onAction="#changeAction" prefHeight="43.0" prefWidth="200.0" text="Body/Abstract" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0">
          <font>
             <Font name="Helvetica" size="21.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button fx:id="onBack" layoutX="28.0" layoutY="667.0" mnemonicParsing="false" onAction="#onBackAction" prefHeight="43.0" prefWidth="147.0" text="Back" AnchorPane.bottomAnchor="20.0">
          <font>
             <Font name="Helvetica" size="21.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <WebView fx:id="bodyText" layoutX="22.0" layoutY="297.0" prefHeight="279.0" prefWidth="737.0" style="-fx-border-color: #ff5900;" />
       <Label fx:id="category" layoutX="155.0" layoutY="260.0" prefHeight="29.0" prefWidth="184.0" text="Category: " AnchorPane.topAnchor="230.0">
          <font>
