@@ -54,7 +54,6 @@ public class LoginController {
 		
 	}
 
-//	TODO
 	@FXML
 	void onCancelClicked (ActionEvent event) {
 		//close stage
@@ -64,7 +63,6 @@ public class LoginController {
 	
 	User getLoggedUsr() {
 		return loggedUsr;
-		
 	}
 		
 	void setConnectionManager (ConnectionManager connection) {
