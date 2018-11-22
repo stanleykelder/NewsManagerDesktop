@@ -51,6 +51,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.stage.FileChooser.ExtensionFilter;
 import serverConection.ConnectionManager;
+import serverConection.exceptions.ServerCommunicationError;
 
 /**
  * @author ÁngelLucas
@@ -64,8 +65,9 @@ public class NewsReaderController {
 	private ObservableList<Categories> categoryList;
 	private ObservableList<Article> articleList;
 	private ObservableList<String> menuItems;
-	File folder = new File("saveNews//");
-	File[] listOfFiles = folder.listFiles();
+	private File folder = new File("saveNews//");
+	private File[] listOfFiles = folder.listFiles();
+	private Article article;
 
 	@FXML
 	private Label idUserLabel;
@@ -119,8 +121,10 @@ public class NewsReaderController {
 			public void changed(ObservableValue<? extends Article> observable, Article oldValue, Article newValue) {
 				if (newValue != null) {
 					readMoreBtn.setDisable(false);
+					article = newValue;
 					bodyWebView.getEngine().loadContent(newValue.getAbstractText());
 					imgView.setImage(newValue.getImageData());
+					
 				} else {
 					bodyWebView.getEngine().loadContent("");
 					readMoreBtn.setDisable(true);
@@ -147,9 +151,8 @@ public class NewsReaderController {
 				} else {
 					headlineList.setItems(articleList);
 				}
-
+				getData();
 			}
-
 		});
 
 	}
@@ -189,6 +192,7 @@ public class NewsReaderController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				getData();
 			} else if (menuList.getSelectionModel().getSelectedItem().equals("New")) {
 				Scene parentScene = ((Node) event.getSource()).getScene();
 				FXMLLoader loader = null;
@@ -215,6 +219,7 @@ public class NewsReaderController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				getData();
 			} else if (menuList.getSelectionModel().getSelectedItem().equals("Edit")) {
 				Scene parentScene = ((Node) event.getSource()).getScene();
 				FXMLLoader loader = null;
@@ -242,6 +247,7 @@ public class NewsReaderController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				getData();
 			} else if (menuList.getSelectionModel().getSelectedItem().equals("Load news from file")) {
 				Scene parentScene = ((Node) event.getSource()).getScene();
 				FXMLLoader loader = null;
@@ -294,16 +300,29 @@ public class NewsReaderController {
 							e.printStackTrace();
 						}
 					});
-
-					
-					// Uncomment next sentence if you want an undecorated window
-					// stage.initStyle(StageStyle.UNDECORATED);
-					// user response is required before continuing with the program
 					stage.initModality(Modality.WINDOW_MODAL);
 					stage.showAndWait();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				getData();
+			} else if (menuList.getSelectionModel().getSelectedItem().equals("Delete")) {
+				Alert alert = new Alert(AlertType.CONFIRMATION, "Delete article " + article.getIdArticle() + " ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+				alert.showAndWait();
+
+				if (alert.getResult() == ButtonType.YES) {
+					try {
+						connection.deleteArticle(article.getIdArticle());
+						Alert alertSuc = new Alert(AlertType.INFORMATION, "Article deleted successfully", ButtonType.OK);
+						alertSuc.showAndWait();
+					} catch (ServerCommunicationError e) {
+						// TODO Auto-generated catch block
+						Alert alertErr = new Alert(AlertType.WARNING, "Article could not be deleted", ButtonType.OK);
+						alertErr.showAndWait();
+						e.printStackTrace();
+					}
+				}
+				getData();
 			}
 		}
 	}

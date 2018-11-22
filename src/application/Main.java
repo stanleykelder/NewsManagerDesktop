@@ -36,10 +36,7 @@ public class Main extends Application {
 			 * in the FXML file. Pane is the father of all container (BorderPane, 
 			 * FlowPane, AnchorPane ...
 			 */
-			/*Pane root = FXMLLoader.load(getClass().getResource(
-					AppScenes.LOGIN.getFxmlFile()));*/
-			/*Pane root = FXMLLoader.load(getClass().getResource(
-					AppScenes.IMAGE_PICKER.getFxmlFile()));*/
+
 			//Code for reader main window
 			FXMLLoader loader = new FXMLLoader (getClass().getResource(
 					AppScenes.READER.getFxmlFile()));
@@ -50,16 +47,11 @@ public class Main extends Application {
 			Properties prop = buildServerProperties();
 			ConnectionManager connection = new ConnectionManager(prop);
 			//Connecting as public (anonymous) for your group
-			connection.setAnonymousAPIKey("REVWX1RFQU1fMDM="); /*Put your group API Key here*/
+			connection.setAnonymousAPIKey("REVWX1RFQU1fMDM="); 
 			//Login whitout login form:
-			connection.login("tobias.piffrader", "65396f08"); //User: Reader2 and password "reader2" 
-		    User user = new User ("tobias.piffrader", Integer.parseInt(connection.getIdUser()));
-			controller.setUsr(user);
 			controller.setConnectionManager(connection);		
 			
 			//end code for main window reader
-			
-		
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.initStyle(StageStyle.UNDECORATED);
