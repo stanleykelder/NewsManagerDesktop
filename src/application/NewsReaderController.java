@@ -6,7 +6,12 @@ package application;
 import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
+
+import javax.json.JsonObject;
 
 import application.news.Article;
 import application.news.Categories;
@@ -28,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -58,6 +64,8 @@ public class NewsReaderController {
 	private ObservableList<Categories> categoryList;
 	private ObservableList<Article> articleList;
 	private ObservableList<String> menuItems;
+	File folder = new File("saveNews//");
+	File[] listOfFiles = folder.listFiles();
 
 	@FXML
 	private Label idUserLabel;
@@ -82,7 +90,7 @@ public class NewsReaderController {
 
 	@FXML
 	private Button closeButton;
-	
+
 	public NewsReaderController() {
 		categoryList = newsReaderModel.getCategories();
 		articleList = newsReaderModel.getArticles();
@@ -100,6 +108,10 @@ public class NewsReaderController {
 		this.headlineList.setItems(articleList);
 		this.menuList.setItems(menuItems);
 		this.idUserLabel.setText("Not logged in");
+
+		
+		
+		
 		// for category filter
 		FilteredList<Article> filteredItems = new FilteredList<Article>(articleList, p -> true);
 		this.headlineList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Article>() {
@@ -228,6 +240,68 @@ public class NewsReaderController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			} else if (menuList.getSelectionModel().getSelectedItem().equals("Load news from file")) {
+				Scene parentScene = ((Node) event.getSource()).getScene();
+				FXMLLoader loader = null;
+				try {
+					loader = new FXMLLoader(getClass().getResource("NewsEdit.fxml"));
+					Pane root = loader.load();
+					Scene scene = new Scene(root);
+					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					Window parentStage = parentScene.getWindow();
+					Stage stage = new Stage();
+					stage.initOwner(parentStage);
+					stage.setScene(scene);
+					// Get the controller for NewsEdit.fxml
+					NewsEditController controller = loader.<NewsEditController>getController();
+					controller.setConnectionManager(connection);
+					controller.setUsr(usr);
+					
+					List<String> listOfFileNames = new ArrayList<String>();
+					
+					// here the selected article is passed
+					for (int i = 0; i < listOfFiles.length; i++) {
+						  if (listOfFiles[i].isFile()) {
+							  listOfFileNames.add(listOfFiles[i].getName());
+						  } else if (listOfFiles[i].isDirectory()) {
+						    System.out.println("Directory " + listOfFiles[i].getName());
+						  }
+						}
+					
+					String[] arrFileNames = new String[ listOfFileNames.size() ];
+					listOfFileNames.toArray( arrFileNames );
+					
+					ChoiceDialog dialog = new ChoiceDialog(arrFileNames[0], arrFileNames);
+					
+					System.out.println("dialog " + dialog.getItems());
+					dialog.setTitle("Load from file");
+					dialog.setHeaderText("Select a file you want to edit:");
+					dialog.setContentText("Article:");
+
+					Optional<String> result = dialog.showAndWait();
+					System.out.println("result " + result);
+					result.ifPresent(articleName -> {
+						System.out.println("articleName " + articleName);
+						JsonObject jsonObj = JsonArticle.readFile("saveNews/" + articleName);
+						System.out.println(jsonObj);
+						try {
+							Article selected = JsonArticle.jsonToArticle(jsonObj);
+							controller.setArticle(selected);
+						} catch (ErrorMalFormedNews e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					});
+
+					
+					// Uncomment next sentence if you want an undecorated window
+					// stage.initStyle(StageStyle.UNDECORATED);
+					// user response is required before continuing with the program
+					stage.initModality(Modality.WINDOW_MODAL);
+					stage.showAndWait();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -264,14 +338,13 @@ public class NewsReaderController {
 		}
 
 	}
-	
-	@FXML
-	private void closeButtonAction(){
-	    // handle to the stage
-	    Stage stage = (Stage) closeButton.getScene().getWindow();
-	    stage.close();
-	}
 
+	@FXML
+	private void closeButtonAction() {
+		// handle to the stage
+		Stage stage = (Stage) closeButton.getScene().getWindow();
+		stage.close();
+	}
 
 	private void getData() {
 		// retrieve data and update UI
