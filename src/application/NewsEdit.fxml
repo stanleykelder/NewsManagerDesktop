@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsEditController">
+<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsEditController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="735.0" prefWidth="737.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -73,10 +73,16 @@
                         </ComboBox>
                      </children>
                   </VBox>
-                  <ImageView fx:id="articleImage" fitHeight="99.0" fitWidth="145.0" onMouseClicked="#onImageClicked" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin></ImageView>
+                  <VBox prefHeight="175.0" prefWidth="184.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="190.0" text="Double click to add a picture">
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ImageView fx:id="articleImage" fitHeight="158.0" fitWidth="184.0" onMouseClicked="#onImageClicked" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <Pane prefHeight="406.0" prefWidth="700.0">
