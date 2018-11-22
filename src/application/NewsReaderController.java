@@ -183,7 +183,9 @@ public class NewsReaderController {
 					stage.showAndWait();
 					// set the User after having logged in
 					usr = controller.getLoggedUsr();
-					idUserLabel.setText(usr.getLogin());
+					if (usr != null) {
+						idUserLabel.setText(usr.getLogin());	
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
