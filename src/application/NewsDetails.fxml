@@ -8,21 +8,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsDetailsController">
+<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsDetailsController">
    <children>
       <Label fx:id="title" layoutX="451.0" layoutY="117.0" prefHeight="41.0" prefWidth="336.0" text="Title:" AnchorPane.topAnchor="50.0">
          <font>
-            <Font name="Helvetica" size="31.0" />
+            <Font name="Helvetica" size="35.0" />
          </font></Label>
       <Label fx:id="subtitle" layoutX="451.0" layoutY="201.0" prefHeight="29.0" prefWidth="337.0" text="Subtitle:" AnchorPane.topAnchor="150.0">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font></Label>
-      <Label layoutX="40.0" layoutY="260.0" text="Category: " textFill="#ff5900" AnchorPane.topAnchor="230.0">
+      <Label layoutX="451.0" layoutY="231.0" text="Category: " textFill="#ff5900" AnchorPane.topAnchor="231.0">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font></Label>
-      <ImageView fx:id="imgView" fitHeight="198.0" fitWidth="356.0" layoutX="29.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="20.0" />
+      <ImageView fx:id="imgView" fitHeight="246.0" fitWidth="356.0" layoutX="29.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="20.0" />
       <Button layoutX="552.0" layoutY="667.0" mnemonicParsing="false" onAction="#changeAction" prefHeight="43.0" prefWidth="200.0" text="Body/Abstract" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0">
          <font>
             <Font name="Helvetica" size="21.0" />
@@ -38,7 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <WebView fx:id="bodyText" layoutX="22.0" layoutY="297.0" prefHeight="279.0" prefWidth="737.0" style="-fx-border-color: #ff5900;" />
-      <Label fx:id="category" layoutX="155.0" layoutY="260.0" prefHeight="29.0" prefWidth="184.0" text="Category: " AnchorPane.topAnchor="230.0">
+      <Label fx:id="category" layoutX="566.0" layoutY="231.0" prefHeight="29.0" prefWidth="184.0" text="Category: " AnchorPane.topAnchor="231.0">
          <font>
             <Font name="Helvetica" size="24.0" />
          </font>

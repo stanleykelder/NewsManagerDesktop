@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsReaderController">
+<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #AFEEEE;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewsReaderController">
    <children>
       <ComboBox fx:id="categoryBox" layoutX="36.0" layoutY="570.0" prefHeight="50.0" prefWidth="200.0" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="570.0">
          <cursor>
@@ -44,7 +44,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <ListView fx:id="menuList" layoutX="289.0" layoutY="10.0" onMouseClicked="#onMenuClicked" orientation="HORIZONTAL" prefHeight="59.0" prefWidth="327.0" style="-fx-border-color: #ff5900;" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0">
+      <ListView fx:id="menuList" layoutX="289.0" layoutY="10.0" onMouseClicked="#onMenuClicked" orientation="HORIZONTAL" prefHeight="60.0" prefWidth="330.0" style="-fx-border-color: #ff5900;" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ListView>
