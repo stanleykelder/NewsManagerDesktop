@@ -176,7 +176,12 @@ public class NewsEditController {
 	@FXML
 	void onSaveFileClicked (ActionEvent event) {
 		Changes();
-		write();
+		if(articleTitle.getText() != "") {
+			write();
+		} else {
+			Alert alert = new Alert(AlertType.WARNING, "Title can't be empty...", ButtonType.OK);
+			alert.showAndWait();
+		}
 	}
 	
 	private void Changes() {

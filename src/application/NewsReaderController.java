@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 
 import javax.json.JsonObject;
@@ -68,6 +69,7 @@ public class NewsReaderController {
 	private File folder = new File("saveNews//");
 	private File[] listOfFiles = folder.listFiles();
 	private Article article;
+	private ObservableList<Article> articleListUsr;
 
 	@FXML
 	private Label idUserLabel;
@@ -107,12 +109,13 @@ public class NewsReaderController {
 		getData();
 		this.categoryBox.setItems(categoryList);
 		this.categoryBox.getSelectionModel().selectFirst();
-		this.headlineList.setItems(articleList);
 		this.menuList.setItems(menuItems);
-		this.idUserLabel.setText("Not logged in");
+		this.idUserLabel.setText("Guest");
+		this.readMoreBtn.setDisable(true);
+		this.headlineList.setItems(articleList);
+		
+		
 
-		
-		
 		
 		// for category filter
 		FilteredList<Article> filteredItems = new FilteredList<Article>(articleList, p -> true);
@@ -124,7 +127,7 @@ public class NewsReaderController {
 					article = newValue;
 					bodyWebView.getEngine().loadContent(newValue.getAbstractText());
 					imgView.setImage(newValue.getImageData());
-					
+
 				} else {
 					bodyWebView.getEngine().loadContent("");
 					readMoreBtn.setDisable(true);
@@ -187,12 +190,21 @@ public class NewsReaderController {
 					// set the User after having logged in
 					usr = controller.getLoggedUsr();
 					if (usr != null) {
-						idUserLabel.setText(usr.getLogin());	
+						idUserLabel.setText(usr.getLogin());
+						articleList.removeIf(p -> p.getIdUser() != usr.getIdUser());
+//						articleList.forEach(article -> {
+//					        if (article.getIdUser() == usr.getIdUser()) {
+//					        	System.out.println(article.getIdUser() + " " + usr.getIdUser() + " " + article);
+//					        	articleList.remove(article);
+//					        }
+//					    });
+						this.headlineList.setItems(articleList);
 					}
+					System.out.println(articleList + " articleList");
+					this.headlineList.setItems(articleList);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				getData();
 			} else if (menuList.getSelectionModel().getSelectedItem().equals("New")) {
 				Scene parentScene = ((Node) event.getSource()).getScene();
 				FXMLLoader loader = null;
@@ -307,7 +319,7 @@ public class NewsReaderController {
 				}
 				getData();
 			} else if (menuList.getSelectionModel().getSelectedItem().equals("Delete")) {
-				Alert alert = new Alert(AlertType.CONFIRMATION, "Delete article " + article.getIdArticle() + " ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+				Alert alert = new Alert(AlertType.CONFIRMATION, "Delete article " + article.getIdArticle() + " ?", ButtonType.YES, ButtonType.NO);
 				alert.showAndWait();
 
 				if (alert.getResult() == ButtonType.YES) {
@@ -370,6 +382,9 @@ public class NewsReaderController {
 	private void getData() {
 		// retrieve data and update UI
 		newsReaderModel.retrieveData();
+		if (usr != null) {
+			articleList.removeIf(p -> p.getIdUser() != usr.getIdUser());
+		}
 	}
 
 	/**
