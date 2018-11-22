@@ -118,6 +118,7 @@ public class NewsEditController {
         this.categoryBox.getItems().setAll(Categories.values());
         this.categoryBox.getSelectionModel().selectFirst();
         
+        //add listeners to textareas to keep text and html synchronized        
         bodyText.textProperty().addListener(
 				 (observable, oldvalue, newvalue) -> bodyHTML.setHtmlText(bodyText.getText()));
         abstractText.textProperty().addListener(
@@ -176,7 +177,8 @@ public class NewsEditController {
 	@FXML
 	void onSaveFileClicked (ActionEvent event) {
 		Changes();
-		if(articleTitle.getText() != "") {
+		System.out.println("title: " + editingArticle.titleProperty());
+		if(editingArticle.titleProperty().get() != "") {
 			write();
 		} else {
 			Alert alert = new Alert(AlertType.WARNING, "Title can't be empty...", ButtonType.OK);
@@ -189,20 +191,10 @@ public class NewsEditController {
 		abstractText.setText(abstractHTML.getHtmlText());
 		
 		this.editingArticle.titleProperty().setValue(articleTitle.getText());
-		System.out.println(articleTitle.getText());
-		
 		this.editingArticle.subtitleProperty().setValue(articleSubtitle.getText());
-		System.out.println(articleSubtitle.getText());
-		
 		this.editingArticle.bodyTextProperty().setValue(bodyText.getText());
-		System.out.println(bodyText.getText());
-
 		this.editingArticle.abstractTextProperty().setValue(abstractText.getText());
-		System.out.println(abstractText.getText());
-
 		this.editingArticle.setCategory(this.categoryBox.getSelectionModel().getSelectedItem());
-//		System.out.println(bodyText.getText());
-		
 		this.editingArticle.setImage(articleImage.getImage());
 	}
 	
@@ -221,7 +213,6 @@ public class NewsEditController {
 			alert.showAndWait();
 			return false;
 		}
-//TODO prepare and send using connection.saveArticle( ...)
 		this.editingArticle.commit();
 		connection.saveArticle(this.editingArticle.getArticleOriginal());
 		
@@ -236,7 +227,6 @@ public class NewsEditController {
 	 */
 	void setConnectionManager(ConnectionManager connection) {
 		this.connection = connection;
-		//TODO enable save and send button
 	}
 
 	/**
@@ -245,7 +235,6 @@ public class NewsEditController {
 	 */
 	void setUsr(User usr) {
 		this.usr = usr;
-		//TODO Update UI and controls 
 		
 	}
 
